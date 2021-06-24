@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   ssss
+</body>
+<script>
+    // 双层循环中从内循环中跳出整个循环
+    // break只是跳出当前循环
+    // 从内循环中跳出整个循环体可以用break + label
+    outLoop: for(let i=0; i<10; i++){
+        console.log('outerloop',i)
+        inerLoop: for(let j = 0; j < 10; j++){
+            if(j ===3){
+                console.log('innerloop', j)
+                break outLoop
+            }
+        }
+    }
+    
+</script>  
+</html>

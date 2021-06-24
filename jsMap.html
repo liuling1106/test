@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   ssss
+</body>
+<script>
+    //map
+    var arrMap = [1,2,3,4]
+    Array.prototype.MyMap = function(fn){
+        let arr = []
+        let length = this.length
+        for( let i = 0; i < length; i++){
+            arr.push(fn(this[i], i))
+        }
+        return arr
+    }
+    let tt = arrMap.MyMap((ele) => {
+        // must have return
+        return ele * 2
+    })
+    console.log('arr, map,,,', tt)
+    //foreach
+    var arr = [1,2,3,4]
+    Array.prototype.MyForeach = function(fn){
+        let length = this.length
+        for(let i = 0; i < length; i++){
+            fn(this[i], i)
+        }
+    }
+
+    arr.MyForeach((ele) => {
+        //不懂为什么这样改变不了值
+        ele *= ele * 3
+    })
+    arr.MyForeach((ele, i) => {
+        //这样可以改变
+        arr[i] = ele * 3
+    })
+
+    console.log('arr, foreach,,,', arr)
+
+    const numbers = [4, 9, 16, 25]
+    const changedNum = numbers.map((item) => {
+        if(item === 4){
+          return item = item * 2
+        } else {
+            return item
+        }
+    })
+    console.log(changedNum)
+</script>  
+</html>
