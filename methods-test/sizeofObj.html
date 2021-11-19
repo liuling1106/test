@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        let obj = {
+            a: 1, 
+            b: 'i am a student',
+            c: [1,2,3],
+            d: {
+                name: '11',
+                age:　22
+            }
+        }
+
+        function sizeOfCount(obj){
+            if (obj === null){
+                return 0
+            }
+            switch(typeof obj){
+                case 'number': {
+                    return 8
+                }
+                case 'string':{
+                    return 2
+                }
+                case 'boolean' : {
+                    return 4
+                }
+                case 'object': {
+                    if(Array.isArray(obj)){
+                        return sizeOfArray(obj)
+                    } else{
+                        return sizeOfObj(obj)
+                    }
+                }
+            }
+        }
+
+        function sizeOfArray(obj){
+            let sizeCount = 0
+            if(obj.length > 0){
+                obj.forEach(el => {
+                    sizeCount += sizeOfCount(obj(i))
+                });
+            }
+            return 0
+        }
+        function sizeOfObj(obj){
+            if(Object.keys(obj).length> 0){
+                let map = new WeakMap();
+                let objCount = 0
+                for(key in obj){
+                    if(map.has(obj[key])){
+                        continue
+                    }
+                    map.set(key, obj[key])
+                    objCount += sizeOfCount(obj[key]) + sizeOfCount(key)
+                }
+                return objCount
+            }else{
+                return 0
+            }
+        }
+
+        sizeOfCount(obj)
+    </script>
+</body>
+</html>

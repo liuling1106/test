@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <div id='msg'></div>
+        <button id="btn">dianwo</button>
+    </div>
+    <script>
+
+function reactive(target){
+    let handler = {
+        get(target, key){
+            let res = Reflect.get(target, key)
+            track(target, key)
+            return typeof res === 'object' ? reactive(res) : res
+        },
+        set(target, key, val){
+            let oldVal = Reflect.get(target, key)
+            let res = Reflect.set(target, key, val)
+            if(res && oldVal !== val){
+                trigger(target, key, val)
+            }
+        }
+    }
+
+    return new Proxy(target, handler)
+}
+
+
+let targetMap = new WeakMap()
+let activeEffect = null
+
+function track(target, key){
+    if (activeEffect){
+        let depsMap = targetMap.get(target)
+        if(!depsMap){
+            targetMap.set(target, (depsMap = new Map()))
+        }
+        let dep = depsMap.get(key)
+        if(!dep){
+            depsMap.set(key, (dep = new Set()))
+        }
+
+        dep.add(activeEffect)
+    }
+}
+function trigger(target, key, val){
+    let depsMap = targetMap.get(target)
+    if(!depsMap){
+        return
+    }
+    let dep = depsMap.get(key)
+    dep.forEach(effect => {
+        effect()
+    });
+}
+
+function effect(eff){
+    activeEffect = eff
+    activeEffect()
+    activeEffect = null
+}
+function ref(raw){
+    let r = {
+        get value() {
+            track(r, 'value')
+            return raw
+        },
+        set Value(newVal){
+            raw = newVal
+            triger(r, 'value')
+        }
+    }
+    console.log('r,,,', r)
+    return r
+}
+
+function computed(getter){
+    const getValue = getter()
+    console.log('getValue,,,,', getValue)
+    let res = ref()
+    effect(() => {res.value = getValue})
+    console.log('res  value,,,,', res)
+    return res
+}
+
+// let salePrice = ref(0); 
+// let total = 0
+
+
+const data = reactive( { price: 5, quantity: 2 })
+let salePrice = computed(() => {
+  return data.price * 0.9;
+});
+
+    effect(() => {
+        // document.querySelector('#msg').innerHTML = ` price is ${data.price}　and total is ${total}, salePrice is ${salePrice.value}`
+        document.querySelector('#msg').innerHTML = ` salePrice is ${salePrice.value}`
+    })
+        //  document.querySelector('#btn').addEventListener('click', ()=>{
+        //         // document.querySelector('#msg').innerHTML = `${data.name}　ｔｏｄａｙ　ｉｓ　${data.age}, testobj aa is `
+        //        setInterval(() => {
+        //         //    data.age++
+
+        //         salePrice.value++
+        //             // console.log('data.age,,,', data.age)
+        //        }, 1000);
+        //             // data.age += 1
+        //            console.log('data.age,,,', data.age)
+        //     }, false)
+    </script>
+</body>
+</html>

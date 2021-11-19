@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const PENDDING= 'Pending'
+    const RESOVED= 'Resolved'
+    const REJECTED= 'Rejected'
+    class Promise{
+        constructor(executor){
+            this.status = PENDDING
+            this.value = undefined
+            this.reason = undefined
+            this.onResolvedCallbacks = []
+            this.onRejectCallbacks = []
+
+            const resolve = (value) =>{
+                if(this.status === PENDDING){
+                    this.value = value
+                    this.status = RESOVED
+                    this.onResolvedCallbacks.forEach(fn => fn())
+                }
+            }
+            const reject = (reson) =>{
+                if(this.status === PENDDING){
+                    this.reson = reson
+                    this.status = REJECTED
+                    this.onRejectCallbacks.forEach(fn => fn())
+                }
+            }
+            try{
+                executor(resolve, reject)
+            } catch(ex) {
+                reject(ex)
+            }
+            
+        }
+        then(onfulfilled, onrejected){
+            // if (this.status === RESOVED){
+            //         onfulfilled(this.value)
+            //     }
+            //     if(this.status === REJECTED){
+            //         onrejected(this.reson)
+            //     }
+
+            //     if(this.status === PENDDING){
+            //         this.onResolvedCallbacks.push(() =>{
+            //             onfulfilled(this.value)
+            //         })
+
+            //         this.onRejectCallbacks.push(() =>{
+            //             onrejected(this.reason)
+            //         })
+            //     }
+            let promise2 = new Promise((resolve, reject) =>{
+                if (this.status === RESOVED){
+                    try{
+                        const x = onfulfilled(this.value)
+                        resolve(x)
+                    } catch(e){
+                        reject(e)
+                    }
+                    
+                }
+                if(this.status === REJECTED){
+                    try{
+                        const x = onrejected(this.reson)
+                        reject(x)
+                    } catch(e){
+                        reject(e)
+                    }
+                }
+
+                if(this.status === PENDDING){
+                    this.onResolvedCallbacks.push(() =>{
+                        try{
+                            const x = onfulfilled(this.value)
+                            resolve(x)
+                        } catch(e){
+                            reject(e)
+                        }
+                        
+                    })
+
+                    this.onRejectCallbacks.push(() =>{
+                        try{
+                            const x = onrejected(this.reason)
+                            reject(x)
+                        } catch(e){
+                            reject(e)
+                        }
+
+                    })
+                }
+            })
+            return promise2
+        }
+    }
+
+    let promise = new Promise((resolve, reject) =>{
+        resolve('resolve value')
+        // //throw new Error('err')
+        // reject('promise reject')
+        setTimeout(() =>{
+            resolve('value')
+        }, 1000)
+
+    })
+    promise.then((data) =>{
+        console.log('resolved response,', data)
+        return '100'
+    }, (err) =>{
+        console.log('reject response,', err)
+    }).then((data) =>{console.log('data2:', data)}, null)
+</script>
+</html>

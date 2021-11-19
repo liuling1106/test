@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function Person(name) {
+        this.name = name;
+    }
+    Person.prototype.sayHi = function () {
+        console.log(this.name);
+    };
+    const jayken = new Person("Jayken");
+    // console.log(jayken.constructor === Person.constructor)
+    // console.log(jayken.constructor === Person.prototype.constructor)
+    // console.log(Person.prototype === jayken.__proto__)
+    console.log(Person.prototype.__proto__ === Object.prototype)
+    // console.log(jayken.constructor.__proto__)
+
+
+    // function  creator(Fn, ...args) {
+    //     var obj = {}  // 这是我的代码
+    //     // var obj = Object.create(Fn.prototype) //TODOS: 这一行没写出来 案例代码
+    //     Fn.apply(obj, args)
+    //     return obj
+    // }
+    // var test = creator(Person, 'zs')
+    // console.log(test)
+    </script>
+</body>
+</html>

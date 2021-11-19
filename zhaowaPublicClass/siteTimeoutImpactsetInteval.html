@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" value="1" id="input"/>
+    <script>
+        // 1. setTimeout 实现setInterval
+        // 2. 实现最优算法
+        // 3. 防抖
+        // 节流
+        // 事件轮询
+
+        //1. 
+        // let timer = null
+        // function mySetInterval(fn, delay){
+           
+        //     timer = setTimeout(() =>{
+        //         fn.apply(this,arguments)
+        //         mySetInterval(fn, delay)
+        //     }, delay)
+        //     // fn.apply(this,arguments)
+        // }
+
+        // function run(){
+        //     console.log(`currentCout ${count}`)
+        //     count++
+        // }
+        // let count = 0
+        // mySetInterval(run, 1000)
+        // run()
+
+        // 2.
+        // TODO:写不出来
+        // let input = document.querySelectorAll("#input")
+        // input.oninput = function(){
+        //     alert(0)
+        // }
+
+        // 3 最优算法
+        // let arr = [[3,5], [2,7], [1,2], [3,10],[5,6]]
+        // // let sortArray = arr.sort((x, y) => x[1]-y[1])
+        // // console.log(`arr ${arr}`)
+        // // console.log(sortArray)
+
+        // function zuiyou(arr){
+        //     let sortArray = arr.sort((x, y) => x[1]-y[1])
+        //     let res = []
+
+        //     let must = 0
+
+        //     // for(let item of sortArray){
+        //     //     if(must<= item[0]){
+        //     //         res.push(item)
+        //     //         must = item[1]
+        //     //     }
+        //     // }
+        //     sortArray.forEach(item => {
+        //         if(must<= item[0]){
+        //             res.push(item)
+        //             must = item[1]
+        //         }
+                
+        //     });
+        //     return res
+        // }
+
+        // console.log('result', zuiyou(arr))
+
+        // 冒泡排序优化
+        // 交换后记录一下位置，最后一次循环的位置记录下
+        
+        let list = [6,4,7,5,1,3,2]
+        function mySort(arr) {
+            if(!Array.isArray(arr)){
+                throw new Error('paremters not array')
+            }
+            let len = arr.length
+            let n = len
+            // for(let j = 0; j<len-1; j++){
+            //         if(arr[j] > arr[j+1]){
+            //             let temp = arr[j]
+            //             arr[j] = arr[j+1]
+            //             arr[j+1] = temp
+            //             newN = j+1
+            //         }
+            // }
+            let swapCount = 0
+            let loopCount = 0
+            for(let i = 0; i<len-1; i++){
+                let newN = 0
+                for(let j = 0; j<n; j++){
+                    if(arr[j] > arr[j+1]){
+                        let temp = arr[j]
+                        arr[j] = arr[j+1]
+                        arr[j+1] = temp
+                        newN = j+1
+                        swapCount++
+                    }
+                    loopCount++
+                }
+                n = newN
+                if(n === 0){
+                    break;
+                }
+            }
+            console.log(`loopCount ${loopCount}, swapCount ${swapCount}`)
+        }
+        mySort(list)
+        console.log(list)
+    </script>
+</body>
+</html>

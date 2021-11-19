@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10"></script>
+    <script>
+        Vue.component('parent', { template: `<div> fu <children>  <div slot="hello"> 这里可以写任意内容，实现了在子组件中占坑， 谁用谁决定显示什么的问题 </div> </children> </div>`})
+        Vue.component('children', { template: `<div> zi  <slot name="hello" /> </div>`})
+        new Vue({
+            el: '#app',
+            template: `<div>  
+                        <parent />
+                        <div>haha
+                            <children>
+                                <div slot="hello"> wo xians</div>
+                            </children>        
+                        </div>
+                    </div>`
+        })
+        // slot 有匿名插槽和具名插槽 和传值插槽， 上面的例子是具名插槽
+    </script>
+</body>
+</html>

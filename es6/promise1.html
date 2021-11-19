@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const PromiseStatus = {
+            Pending: 'Pending',
+            FullFilled: 'FullFilled',
+            Rejected: 'Rejected'
+        }
+        // class Promise{
+        //     constructor(executor){
+        //         this.status = PromiseStatus.Pending
+        //         executor()
+        //     },
+
+        //     resove: function(){
+        //         arrayFullField.foreach(item =>{
+        //             item()
+        //         })
+        //         this.value = res
+        //         this.staus = PromiseStatus.FullFiled
+        //     },
+        //     reject: function(res){
+        //         arrayReject.push(res)
+        //         this.reason = res
+        //         this.staus = PromiseStatus.Reject
+        //     },
+        //     arrayFullField = []
+        //     arrayReject = []
+        //     then: function(){
+        //         arrayFullField.push(res)
+        //         arrayReject.push(res)
+        //     },
+        //     catch: function(){
+
+        //     }
+        // }
+        class Promise{
+            constructor(executor){
+                this.status = PromiseStatus.Pending
+                this.Reason = undefined
+                this.Value = undefined
+                this.fullFileFn = []
+                this.rejectFileFn = []
+
+                var resolve = (data) =>{
+                    if(PromiseStatus.Pending === 'Pending'){
+                        this.status = PromiseStatus.FullFilled
+                        this.Value = data
+                        this.fullFileFn.forEach(fn => fn())
+                    }
+                }
+
+                var reject = (data) =>{
+                    if(PromiseStatus.Pending=== 'Pending'){
+                        this.status = PromiseStatus.Rejected
+                        this.Reason = data
+                        this.rejectFileFn.forEach(fn => fn())
+                    }
+                }
+                try{
+                    executor(resolve, reject)
+                }catch(e){
+                    reject(e)
+                }
+                
+            }
+
+            then = (onFullfilledCallBack, onrejectedCallBack) =>{
+                var promise2 = new Promise((resolve, reject) =>{
+                    try{
+                        if(this.status === PromiseStatus.FullFilled){
+                        const  x = onFullfilledCallBack(this.Value)
+                        resolve(x)
+                    }
+                    if(this.status === PromiseStatus.Rejected){
+                        const x = onFullfilledCallBack(this.Reason)
+                        reject(x)
+                    }
+                    if(this.status === PromiseStatus.Pending){
+                        this.fullFileFn.push(() =>{
+                            onFullfilledCallBack(this.Value)
+                        })
+                        this.rejectFileFn.push(() =>{
+                            onrejectedCallBack(this.Reason)
+                        })
+                    }
+                    }catch(e){
+                        reject(e)
+                    }
+                })
+                
+                return promise2
+            }
+
+        }
+
+        let promise = new Promise((resolve, reject) =>{
+            resolve(100)
+            // throw new Error('error')
+            // reject('error')
+            setTimeout(()=>{
+                console.log('setTimeOut')
+            }, 1000)
+        })
+        promise.then((data) =>{
+            console.log('then data', data)
+            return(200)
+        }, (err) => {
+            console.log('then error')
+        }).then((val)=>{
+            console.log('the second then',val)
+            throw new Error('Second throw errore rror')
+        }, null).then((res)=>{
+            console.log('chengxu报错')
+        })
+    </script>
+</body>
+</html>

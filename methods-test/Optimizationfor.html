@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const arr = [2,4,6,7,8,3,5,9]
+        let resArr = []
+        for (let i = 0, len = arr.length; i < len; i++){
+            let res = 11 - arr[i]
+            if (arr.indexOf(res)>0){
+                resArr.push({ headIndex: i, footIndex: arr.indexOf(res), headvalue: arr[i], footValue: res})
+            }
+        }
+        console.log('resArr', resArr)
+    </script>
+</body>
+</html>

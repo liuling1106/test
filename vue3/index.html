@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div id='msg'></div>
+        <button id="btn">dianwo</button>
+    </div>
+    <!-- <script src="./vue3-2.js"></script> -->
+    <script>
+            // const data =
+            // const doubleAge = computed(() => this.age * 2)
+            // const data = reactive( {
+            //     name: 'kkb',
+            //     age: 6
+            // })
+            // console.log(data.age)
+            // data.age++
+            // let double = computed(() =>{ data.age += 2 })
+            // console.log('double,,,', double())
+            // effect(() => {
+            //     document.querySelector('#msg').innerHTML = `${data.name}　ｔｏｄａｙ　ｉｓ　${data.age}, and doule is ${double.value}`
+            // })
+            
+            
+            // document.querySelector('#btn').addEventListener('click', ()=>{
+            //     // document.querySelector('#msg').innerHTML = `${data.name}　ｔｏｄａｙ　ｉｓ　${data.age}, testobj aa is  ${data.testObj.aa}`
+            // //    setInterval(() => {
+            // //        data.age++
+            // //        console.log('data.age,,,', data.age)
+            // //    }, 1000);
+            //         data.age += 1
+            //     //    console.log('data.age,,,', data.age)
+            // }, false)
+
+       let strTest = '(())'
+
+        function isKuohao(str){
+            let arr = []
+
+            for(const s of str){
+                if (s !== ')')
+                {
+                    arr.push(s)
+                }
+                else{
+                    arr.pop()
+                }
+            }
+            return arr.length === 0
+        }
+        console.log(isKuohao(strTest))
+
+  
+
+
+    </script>
+    
+</body>
+</html>

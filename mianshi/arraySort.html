@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="border"></div>
+    hello!!!
+    <!-- <div class="border1"></div> -->
+    <div class="box"></div>
+</body>
+<script>
+    var arr1 = [
+	{ID: "4001104",pxId: 2001,dj: 1,bh: 4001104},
+	{ID: "4001105",pxId: 2005,dj: 1,bh: 4001105},
+	{ID: "4010102",pxId: 2001,dj: 10,bh: 4010102},
+	{ID: "4010103",pxId: 2005,dj: 10,bh: 4010103},
+	{ID: "4010104",pxId: 2001,dj: 10,bh: 4010104},
+	{ID: "4001102",pxId: 2001,dj: 1,bh: 4001102},
+	{ID: "4001103",pxId: 2002,dj: 1,bh: 4001103},
+	{ID: "4001106",pxId: 2003,dj: 1,bh: 4001106},
+	{ID: "4001101",pxId: 2001,dj: 2,bh: 4001101},
+	{ID: "4010101",pxId: 2001,dj: 10,bh: 4010101}
+];
+// arr1.sort((a, b) => {  
+// 	if(a["pxId"] === b["pxId"]) {    
+// 		if(a["dj"] > b["dj"]) {      
+// 			return 1;    
+// 		} else if(a["dj"] < b["dj"]) {      
+// 			return -1;    
+// 		} else {      
+// 			return 0;    
+// 		}  
+// 	} else {    
+// 		if(a["pxId"] > b["pxId"]) {      
+// 			return 1;    
+// 		} else {      
+// 			return -1;    
+// 		}  
+// 	}
+// })
+// console.log(arr1);
+
+// var reader = new FileReader()
+// reader.readAsText('./BuildVersion.txt')
+// reader.onload = function(f) {
+//   console.log('e.target.result,,,,', this.result)
+// }
+// const txt = reader.readAsText('./BuildVersion.txt', 'gbk')
+// console.log('txt,,,', txt)
+// upload('BuildVersion.txt')
+
+// function upload(filePath) {
+//   if (window.FileReader) {
+//     var file = filePath
+//     var reader = new FileReader()
+//     reader.onload = function() {
+//       console.log(this.result)
+//       alert(this.result)
+//     }
+//     reader.readAsDataURL(filePath)
+//     reader.readAsText(filePath)
+//   } else if (typeof window.ActiveXObject !== 'undefined') {
+//     var xmlDoc
+//     xmlDoc = new ActiveXObject("Microsoft.XMLDOM")
+//     xmlDoc.async = false
+//     xmlDoc.load(filePath)
+//     alert(xmlDoc.xml)
+//   } else if (document.implementation && document.implementation.createDocument) {
+//     const xmlDoc = document.implementation.createDocument('', '', null)
+//     xmlDoc.async = false
+//     xmlDoc.load(filePath)
+//     alert(xmlDoc.xml)
+//   } else {
+//     alert('error')
+//   }
+// }
+
+
+function ReadFile(data) {
+        console.log(data)
+}     
+var xhr = new XMLHttpRequest()
+xhr.onload = function () {            
+        ReadFile(xhr.responseText)
+        
+};
+try {
+        xhr.open('get', './BuildVersion.txt', true)
+        xhr.send()
+}
+catch (ex) {
+    	console.log("catch")
+        ReadFile(ex.message)
+}  
+</script>
+<style>
+     .border {
+        width: 0;
+        height: 0;
+        border-style:solid;
+        border-width: 0 50px 50px;
+        border-color: transparent transparent #d9534f;
+    }
+
+    .border:after{
+    content: '';
+    border-style:solid;
+    border-width: 0 40px 40px;
+    border-color: transparent transparent #fff;
+    position: absolute;
+    top: 13px;
+    left: 17px;
+}
+.box{
+    width: 0px;
+    height: 0px;
+    /* 边框大小 只设置两条边*/
+    border-top: #4285f4 solid;
+    border-right: transparent solid;
+    border-width: 85px; 
+    /* 其他设置 */
+    margin: 50px;
+}
+</style>
+</html>

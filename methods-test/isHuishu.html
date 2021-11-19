@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function isHuishu(num){
+            if(num === null || num === undefined){
+                return false
+            }
+            if(typeof num !=='number'){
+                return false
+            }
+            const str = num.toString()
+            const len = str.length
+            if(len === 1){
+                return false
+            }
+            if(len/2===0){
+                return false
+            }
+            const middle = len/2 -1
+            let res = true
+            for(i = 0; i <= middle; i++){
+                if(str[i] !== str[len-i-1]){
+                    res = false
+                    return res
+                }
+            }
+            return res
+        }
+
+        console.log(isHuishu(12321))
+        console.log(isHuishu(1234321))
+        console.log(isHuishu(123221))
+        console.log(isHuishu('123221'))
+    </script>
+</body>
+</html>

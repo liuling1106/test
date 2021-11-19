@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <div id="app">
+    A{{msg}}
+    <!-- <div @click="aa">test lister</div>
+    <my-button :msg="msg" @todo="handleClick"></my-button> -->
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10"></script> -->
+
+  <script>
+    // let vm = new Vue({
+    //   el: '#app',
+    //   data: {
+    //     msg: '100'
+    //   },
+    //   methods: {
+    //     handleClick () {
+    //       console.log('点击事件')
+    //     },
+    //     aa(){
+    //         console.log('点击事件div')
+    //     }
+    //   },
+    //   components: {
+    //     'MyButton': {
+    //       template: `<div>B<my-radio v-on="$listeners"></my-radio></div>`,
+    //       components: {
+    //         'MyRadio': {
+    //           template: `<div @click="$listeners.todo">C</div>`,
+    //         }
+    //       },
+    //       created() {
+    //         console.log(this.$listeners)
+    //       },
+    //     },
+    //   }
+    // })
+    let obj = {
+  name: 'imooc',
+  lesson: 'ES5 Wiki',
+  get info() {
+    console.log(`这是慕课 ${this.lesson}`);
+    return 0
+  }
+};
+Reflect.get(obj, 'info');	// 这是慕课 ES5 Wiki
+Reflect.get(obj, 'info', {lesson: 'ES6 Wiki'});	// 这是慕课 ES5 Wiki
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const PENDDING = 'Pending'
+        const RESOLVE = 'RESOLVE'
+        const REJECT = 'REJECT'
+        class Promise{
+            constructor(excutor){
+                this.status = PENDDING
+                this.Value = undefined
+                this.Reason = undefined
+                this.onresolveCallback = []
+                this.onrejectCallback = []
+                const resolve = (value) =>{
+                    if(this.status === PENDDING){
+                        this.status = RESOLVE
+                        this.Value = value
+                        this.onrejectCallback.forEach(fn=>fn())
+                    }
+                }
+                const reject = (reson) =>{
+                    if(this.status === PENDDING){
+                        this.status = REJECT
+                        this.Reason = reson
+                        this.onresolveCallback.forEach(fn=>fn())
+                    }
+                }
+
+                excutor(resolve, reject)
+            }
+            then(onFullfilled, onReject){
+                let promise2 = new Promise((resolve, reject) =>{
+                if(this.status === RESOLVE){
+                    const x = onFullfilled(this.Value)
+                    resolve(x)
+                }
+                if(this.status === REJECT){
+                    const x =  onReject(this.Reason)
+                    reject(x)
+                }
+                if(this.status === PENDDING){
+                    this.onresolveCallback.push(() =>{
+                        const x = onFullfilled(this.Value)
+                        resolve(x)
+                    })
+                    this.onrejectCallback.push(() =>{
+                        const x = onReject(this.Reason)
+                        reject(x)
+                    })
+                }
+                })
+                return promise2
+            }
+            all(arrPromise){
+
+            }
+        }
+        let testPromise = new Promise((resolve, reject) =>{
+            //setTimeout(resolve('test setTimeout,,,'), 1000)
+            resolve('resolved')
+        })
+        testPromise.then((res) =>{
+            console.log('res,',res)
+            return('200')
+        },
+        (err) => {
+            console.log(err)
+        }).then((res)=>{
+            console.log('the second then', res)
+            return Error('throw exception')
+        }, null).then((res) =>{
+            console.log('third then', res)
+        }, (ex) =>{
+            console.log('exception,', ex)
+        })
+    </script>
+</body>
+</html>

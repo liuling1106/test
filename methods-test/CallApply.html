@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function add(a,b){
+        return a+b;
+    }
+    function sub(c,d){
+        return c-d;
+    }
+    function result(){
+        this.addValue = null;
+        this.subValue = null;
+        this.showResult=function(){
+            alert(this.addValue);
+            alert(this.subValue);
+        }
+    }   
+    function myCallTest(){//此处this指向了add，如果不使用call则this指向window对象
+            return add.call(this,7,2);
+    }
+
+    var stu1 = {
+        name: "xm",
+        age: 10,
+        sayHello: function(){
+            console.log('name,' + this.name + 'age, ' + this.age)
+            return 10
+        }
+    }
+    var stu2 = {
+        name:"test stu2",
+    }
+
+    console.log('stu1.name', stu1.name)
+    let res = stu1.sayHello.apply(stu2)
+    console.log('res,,,', res)
+
+    </script>
+</body>
+</html>

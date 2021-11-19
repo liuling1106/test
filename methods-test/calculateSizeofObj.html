@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // let obj = {
+        //     a: 1, 
+        //     b: 'i am a student',
+        //     c: [1,2,3],
+        //     d: {
+        //         name: '11',
+        //         age:　22
+        //     }
+        // }
+        const b = { name: 'b'}
+
+        const obj = {
+            a: 111,
+            b: 'cccc',
+            2222: false,
+            d: b,
+            e: b
+        }
+
+        function sizeOfCount(obj){
+            if (obj === null){
+                return 0
+            }
+            console.log('obj,,,', obj)
+            switch(typeof obj){
+                case 'number': {
+                    return 8
+                }
+                case 'string':{
+                    //return 2
+                    //TODO: xiecuole
+                    return obj.length * 2
+
+                }
+                case 'boolean' : {
+                    return 4
+                }
+                case 'object': {
+                    if(Array.isArray(obj)){
+                        return sizeOfArray(obj)
+                    } else{
+                        return sizeOfObj(obj)
+                    }
+                }
+            }
+        }
+
+        function sizeOfArray(obj){
+            let sizeCount = 0
+            if(obj.length > 0){
+                obj.map(sizeOfCount).reduce((acc, curr) =>{
+                    return acc + curr
+                }, 0)
+                // // obj.reduce((el) =>{})
+                // obj.forEach(el => {
+                //     sizeCount += sizeOfCount(obj(i))
+                // });
+                // return sizeCount
+            }
+            return 0
+        }
+
+        let set = new WeakSet();
+
+        function sizeOfObj(obj){
+          if(obj === null){
+            return 0
+          }
+            let objCount = 0
+            for(key in obj){
+              if (obj[key] !== null && typeof obj[key] === 'object'){
+                    if(set.has(obj[key])){
+                    continue
+                  }
+                  set.add(obj[key])
+                  // sizeOfCount(obj[key])
+                }
+                objCount += sizeOfCount(key)
+                objCount += sizeOfCount(obj[key])
+            }
+            
+            return objCount
+        }
+
+        console.log(sizeOfCount(obj))
+    </script>
+</body>
+</html>
