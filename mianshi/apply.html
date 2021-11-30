@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        Function.prototype.MyCall = function(context, ...args){
+            console.log('begin')
+            debugger
+            let ctx = context || window
+            let fn = Symbol()
+            ctx[fn] = this
+            console.log('this,,,', this)
+            console.log('ctx[fn],,,', ctx[fn])
+            args = args? args: []
+            const res = args.length>0? ctx[fn](...args): ctx[fn]()
+
+            delete ctx[fn]
+
+            return res
+        }
+
+        function Person(name) {
+           this.name = name
+        }
+
+        Person.prototype.getName = function(){
+            alert(this.name)
+        }
+
+        function sayHi(name){
+            alert('nihao,' + name)
+        }
+
+        var pzs = new Person('zs')
+        sayHi.MyCall(pzs, 'zs')
+
+    </script>
+</body>
+</html>

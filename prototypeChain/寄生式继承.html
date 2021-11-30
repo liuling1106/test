@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(obj) {
+    this.name = obj.name
+    this.age = obj.age
+}
+Person.prototype.add = function(value){
+    console.log(value)
+}
+var p1 = new Person({name:"番茄", age: 18})
+console.log('p1', p1)
+// p1.play('test')
+
+function Person1(obj) {
+    console.log('this,', this)
+    Person.call(this, obj)
+    this.sex = obj.sex
+}
+// 这一步是继承的关键
+Person1.prototype = Object.create(Person.prototype);
+Person1.prototype.constructor = Person1;
+
+Person1.prototype.play = function(value){
+    console.log(value)
+}
+var p2 = new Person1({name:"鸡蛋", age: 118, sex: "男"})
+console.log(p2)
+p2.add('add')
+p2.play('play')
+    </script>
+</body>
+</html>

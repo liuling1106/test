@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        Function.prototype.MyApply = function(context, args = []){
+            var ctx = context || window
+            var fn = Symbol()
+            ctx[fn] = this
+
+            const res = args.length>0? ctx[fn](...args): ctx[fn]()
+            delete ctx[fn]
+            return res
+        }
+
+        function Person(name){
+            this.name = name
+        }
+
+        Person.prototype.getName = function(){
+            console.log('getname'+ this.name)
+        }
+
+        const pzs = new Person('zs')
+        const pls = new Person('ls')
+        pzs.getName()
+        pzs.getName.MyApply(pls)
+    </script>
+</body>
+</html>

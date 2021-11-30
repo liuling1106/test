@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="test" id="test">
+        <ul>
+            <li> 点我</li>
+            <li> 点我</li>
+            <li> 点我</li>
+            <li> 点我</li>
+            <li> 点我</li>
+            <li> 点我</li>
+            <li> 点我</li>
+            <li> 点我</li>
+            <li> 点我</li>
+        </ul>
+    </div>
+    <script>
+        let dom = document.getElementById('test')
+        dom.onclick = (e) =>{
+            const ev = e || window.event
+            console.log('event value', ev)
+            const target = ev.target || ev.srcElement
+            if(target.nodeName.toLowerCase()==='li'){
+                alert('点我')
+            }
+        }
+    </script>
+</body>
+
+</html>
