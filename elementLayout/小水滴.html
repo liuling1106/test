@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div class="container">
+        <div class="circle"></div>
+        <div class="tri"></div>
+    </div> -->
+    <div class="droplet"></div> 
+    <div class="circleTest"></div>
+    <div class="shuidi div1"></div>
+
+    <style>
+        /* 小水滴1 */
+        .droplet {
+            width: 4em;
+            height: 4em;
+            border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+            background-color: #07C;
+            transform: rotate(-45deg);
+        }
+        .shuidi{
+           /* 第一步边框弧度绘制为雨滴形状 */
+            border-radius: 0px 60% 90% 60%;
+            /* 使其渲染45度 */
+            transform: rotate(45deg);
+            /* 添加渐变使其具有高光效果 */
+            background: radial-gradient(#f3eeee, #86cbffb5, #86cbff);
+        }
+        .div1{
+            width: 50px;
+            height: 50px;
+        }
+
+        .container{
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+            margin: 0 auto;
+        }
+        .circle{
+            width: 50px;
+            height: 50px;
+            border: 1px solid blue;
+            border-bottom: 0 none;
+            /* background-color: blue; */
+            margin: 0 auto;
+            border-radius: 50%;
+            /* border-bottom: 50px solid blue; */
+        }
+        .tri{
+            width: 50px;
+            height: 50px;
+            border-style: solid;
+            border-width: 10px;
+            border-color: red blue yellow green;
+            /* border: 50px solid blue; */
+            /* border-top: transparent;
+            border-left: transparent;
+            border-right: transparent; */
+            margin: 0 auto;
+        }
+    </style>
+    
+</body>
+</html>

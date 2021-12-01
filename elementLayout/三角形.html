@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="onlyTrig"></div>
+    </div>
+    
+    <div id="wrap">
+        <span> 这是用border实现的</span>
+        <div class="trial1 tria2"></div>
+        <div class="trial1 tria3"></div>
+    </di3>
+
+    <style>
+        .container{
+            width: 30px;
+            height: 30px;
+        }
+        #wrap{
+            width: 600px;
+            height: 40px;
+            border: solid 1px #000;
+            background-color: pink;
+            border-radius: 10px;
+            position: relative;
+            text-align: center;
+            top:200px;
+            line-height: 40px;
+        }
+        .trial1{
+            width: 0px;
+            height: 0px;
+            position:absolute;
+            left: 50%;
+            border-width: 16px;
+            border-style: solid;
+
+        }
+        .tria2{
+            border-color: transparent transparent#000 transparent;
+            bottom: 40px;
+        }
+        .tria3{
+            border-color: transparent transparent pink transparent;
+            bottom: 39px;
+        }
+
+        .onlyTrig{
+            /* width: 20px;
+            height: 20px; */
+            border-width: 30px;
+            border-color: transparent transparent transparent green;
+            border-style: solid;
+        }
+    </style>
+</body>
+</html>
